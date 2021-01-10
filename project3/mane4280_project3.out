@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Physics Model}{}% 1
+\BOOKMARK [1][-]{section.2}{Mathematical Model}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Optimization problem}{section.2}% 3
+\BOOKMARK [1][-]{section.3}{Analysis model}{}% 4
+\BOOKMARK [2][-]{subsection.3.1}{Solution to the ODE}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.2}{Surrogate model \205 Gaussian processing}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.3}{Optimization}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{Implementation}{}% 8
+\BOOKMARK [1][-]{section.5}{Results and discussion}{}% 9
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 10
+\BOOKMARK [1][-]{section*.5}{Appendices}{}% 11
+\BOOKMARK [1][-]{Appendix.a.A}{eqn27.m}{}% 12
+\BOOKMARK [1][-]{Appendix.a.B}{objFunc.m}{}% 13
+\BOOKMARK [1][-]{Appendix.a.C}{sampling.m}{}% 14
+\BOOKMARK [1][-]{Appendix.a.D}{gaussianProcessing.m}{}% 15
+\BOOKMARK [1][-]{Appendix.a.E}{surrogate.m}{}% 16
+\BOOKMARK [1][-]{Appendix.a.F}{run\137opt.m}{}% 17
+\BOOKMARK [1][-]{Appendix.a.G}{getGeomConstraints.m}{}% 18

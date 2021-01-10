@@ -1,0 +1,9 @@
+\begin{thebibliography}{1}
+\newcommand{\enquote}[1]{``#1''}
+
+\bibitem{doi:10.1119/1.17742}
+Kautz, R.~L. and Huggard, B.~M., \enquote{Chaos at the amusement park: Dynamics
+  of the Tilt‐A‐Whirl,} {\em American Journal of Physics\/}, Vol.~62,
+  No.~1, 1994, pp.~59--66.
+
+\end{thebibliography}

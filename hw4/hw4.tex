@@ -1,0 +1,170 @@
+\documentclass[a4paper]{article}
+\usepackage[left=1cm, right=1cm, top=1cm, bottom=1cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{bm}
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+\usepackage{listings}
+\lstset{ 
+  language=Matlab, % choose the language of the code
+  basicstyle=\fontfamily{pcr}\selectfont\footnotesize\color{black},
+  keywordstyle=\color{red}\bfseries, % style for keywords
+  numbers=none, % where to put the line-numbers
+  numberstyle=\tiny, % the size of the fonts that are used for the line-numbers
+%  keywordstyle     = \bfseries,
+  identifierstyle  = \color{blue},
+  commentstyle     = \color{olive},     
+  backgroundcolor=\color{white},
+  showspaces=false, % show spaces adding particular underscores
+  showstringspaces=false, % underline spaces within strings
+  showtabs=false, % show tabs within strings adding particular underscores
+  frame=single, % adds a frame around the code
+  tabsize=2, % sets default tabsize to 2 spaces
+  rulesepcolor=\color{gray},
+  rulecolor=\color{black},
+  captionpos=b, % sets the caption-position to bottom
+  breaklines=true, % sets automatic line breaking
+  breakatwhitespace=false, 
+}
+\usepackage{float}
+\usepackage[toc,page]{appendix}
+
+% hyperref must be last
+\usepackage{hyperref}
+\hypersetup{
+  backref=true,
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+\newcommand{\diff}[0]{\mathrm{d}}
+\newcommand{\etal}[0]{{\em et~al.\@}\xspace}
+\newcommand{\eg}[0]{{e.g.\@}\xspace}
+\newcommand{\ie}[0]{{i.e.\@}\xspace}
+\newcommand{\etc}[0]{{etc.\@}\xspace}
+\newcommand{\viz}[0]{{viz.\@}\xspace}
+\newcommand{\resp}[0]{{resp.\@}\xspace}
+
+\title{MANE HW4}
+\author{Jianfeng Yan}
+\begin{document}
+\maketitle
+\section*{Problem 1}
+\begin{table}[h]
+  \begin{center}
+    \caption[]{results of Gauss integral} \label{tb:conv_his}
+    \begin{tabular}{p{0.45\textwidth}p{0.15\textwidth}}
+      \hline
+      number of Gauss Quadrature in each direction&      integral     \\
+      \hline
+      3 &          0.8119  \\
+      4&          0.8119\\
+      5&          0.8287\\
+
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{lstlisting}[language=Matlab]
+function [ f ] = gaussIntegrate(x1, x2, y1, y2, n_qp, func)
+if (x1 > x2)
+    error('x1 > x2');
+end
+if (y1 > y2)
+    error ('y1 > y2');
+end
+
+xi = zeros(n_qp, 1);
+w = zeros(n_qp, 1);
+
+if n_qp == 1
+    xi(1) = 0.0;
+    w(1) = 2.0;
+elseif n_qp == 2
+    xi(1) = -0.5773502691896257645091488;
+    xi(2) = 0.5773502691896257645091488;
+    w(1) = 1.0;
+    w(2) = 1.0;
+elseif n_qp == 3
+    xi(1) = -0.7745966692414833770359;
+    xi(2) = 0.0;
+    xi(3) =  0.7745966692414833770359;
+    w(1) = 0.5555555555555555555556;
+    w(2) = 0.888888888888888888889;
+    w(3) = 0.5555555555555555555556;
+elseif n_qp == 4
+    xi(1) = -0.8611363115940525752239;
+    xi(2) = -0.3399810435848562648027;
+    xi(3) =  0.3399810435848562648027;
+    xi(4) =  0.8611363115940525752239;
+    w(1) = 0.3478548451374538573731;
+    w(2) = 0.6521451548625461426269;
+    w(3) = 0.6521451548625461426269;
+    w(4) = 0.3478548451374538573731;
+elseif n_qp == 5
+    xi(1) = -sqrt(5 - 2*sqrt(10/7)) / 3;
+    xi(2) = -sqrt(5 + 2*sqrt(10/7)) / 3;
+    xi(3) = 0.0;
+    xi(4) = -xi(2);
+    xi(5) = -xi(1);
+    w(1) = (322 + 13*sqrt(70)) / 900;
+    w(2) = (322 - 12*sqrt(70)) / 900;
+    w(3) = 128 / 225;
+    w(4) = w(2);
+    w(5) = w(1);
+end
+
+x = x1 + (xi + 1) * (x2 - x1) / 2;
+y = y1 + (xi + 1) * (y2 - y1) / 2;
+f = 0.0;
+for i = 1 : n_qp
+sub_sum = 0.0;
+for j = 1 : n_qp
+sub_sum = sub_sum + w(j) * func(x(i), y(j));
+end
+f  = f + w(i) * sub_sum;
+end
+f = f * (x2 - x1) * (y2 - y1) / 4;
+end
+
+integrand = @(x, y) sin(exp(-y))* exp(-x*y);
+x1 = 0; x2 = 2; y1 = 0; y2 = 1;
+n_qp = 3;
+f = gaussIntegrate(x1, x2, y1, y2, n_qp, integrand);
+\end{lstlisting}
+
+\section*{Problem 2}
+1. There are two objectives in this problem. One possible way to deal with it is to transform the problem into a minimization problem with a single objective. For example, we can choose the new objective as
+\begin{equation*}
+f = C/E
+\end{equation*}
+where $C$ and $E$ are the cost and efficient, respectively. Then we can solve the optimization problem as usual.
+
+One way is to freeze either the cost or the efficiency based on existing database. Let's say we freeze the efficiency, then we can minimize the cost for multiple values of efficiency. In this way the rest work is to choose an appropriate solution from the results.\\
+2. For the first approach, the implementation reads
+\begin{lstlisting}[language=Matlab]
+objFunc = @(x) Cost(x) / Efficiency(x);
+x0 = [1;1];
+optns = optimoptions(@fmincon, 'Display', 'iter');
+[x, fval] = fmincon(objFunc, x0, [], [], [], [], [], [], [], optns);
+\end{lstlisting}
+This gives us the optimizer $x^* = [-0.0000; 
+ \:\:1.7513]$ with the optimal value $16.3471$, the cost $13.0671$, and the efficiency $0.7994$. \\ 
+ 3. In practice, this new objective function may be more complex. If we know the relationship between the commercial profit and (cost, efficient), this relationship can be used as the objective to be maximize. Otherwise, some algorithms targeting  multiple objectives may be necessary.
+\end{document}
+

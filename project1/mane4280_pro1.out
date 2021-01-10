@@ -1,0 +1,10 @@
+\BOOKMARK [1][-]{section.1}{Physics Model}{}% 1
+\BOOKMARK [1][-]{section.2}{Mathematical Model}{}% 2
+\BOOKMARK [1][-]{section.3}{Analysis function}{}% 3
+\BOOKMARK [1][-]{section.4}{Implementation}{}% 4
+\BOOKMARK [1][-]{section.5}{Results and discussion}{}% 5
+\BOOKMARK [1][-]{section*.4}{Appendices}{}% 6
+\BOOKMARK [1][-]{Appendix.a.A}{calcHeight.m}{}% 7
+\BOOKMARK [1][-]{Appendix.a.B}{calcConstraints.m}{}% 8
+\BOOKMARK [1][-]{Appendix.a.C}{calcObjective.m}{}% 9
+\BOOKMARK [1][-]{Appendix.a.D}{optimize.m}{}% 10
